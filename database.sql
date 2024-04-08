@@ -47,3 +47,13 @@ CREATE TABLE cargo (
 	FOREIGN KEY (owner_id) REFERENCES persone (id) ON DELETE SET NULL,
 	FOREIGN KEY (classification_id) REFERENCES classification (id) ON DELETE SET NULL
 );
+
+CREATE TYPE access_lvl AS ENUM ('admin', 'controller');
+CREATE TABLE worker (
+	id INTEGER PRIMARY KEY,
+	login TEXT NOT NULL,
+	password TEXT NOT NULL,
+	access_level access_lvl NOT NULL,
+
+	FOREIGN KEY (id) REFERENCES persone (id) ON DELETE CASCADE
+);
